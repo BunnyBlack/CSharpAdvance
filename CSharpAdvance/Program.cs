@@ -6,7 +6,12 @@ namespace CSharpAdvance
     {
         public static void Main(string[] args)
         {
-            
+            var processor = new PhotoProcessor();
+            var filter = new PhotoFilters();
+            PhotoProcessor.PhotoFilterHandler filterHandler = filter.ApplyBrightness;
+            filterHandler += filter.ApplyContrast;
+            filterHandler += filter.Resize;
+            processor.Process("photo.jpg",filterHandler);
         }
 
         private static void MyNullable()
