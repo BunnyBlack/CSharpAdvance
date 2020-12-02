@@ -9,6 +9,13 @@ namespace CSharpAdvance
             
         }
 
+        private static void ExtensionMethods()
+        {
+            var post = "This is going to be a really really really really long post";
+            var shortenedPost = post.Shorten(5);
+            Console.WriteLine(shortenedPost);
+        }
+
         private static void EventMethod()
         {
             var video = new Video {Title = "Video 1"};
