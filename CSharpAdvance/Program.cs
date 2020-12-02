@@ -9,6 +9,43 @@ namespace CSharpAdvance
             
         }
 
+        private static void LambdaMethod2()
+        {
+            var books = new BookRepository().GetBooks();
+
+            var cheapBooks = books.FindAll(IsCheaperThan10Dollars);
+
+            foreach (var cheapBook in cheapBooks)
+            {
+                Console.WriteLine(cheapBook.Title);
+            }
+
+            Console.WriteLine();
+
+            cheapBooks = books.FindAll(b => b.Price < 10f);
+            foreach (var cheapBook in cheapBooks)
+            {
+                Console.WriteLine(cheapBook.Title);
+            }
+        }
+
+        private static bool IsCheaperThan10Dollars(Book book)
+        {
+            return book.Price < 10f;
+        }
+
+        private static void LambdaMethod()
+        {
+            Func<int, int> square = Square;
+            square += n => n * n;
+            Console.WriteLine(square(5));
+        }
+
+        private static int Square(int n)
+        {
+            return n * n;
+        }
+
         private static void DelegateMethod()
         {
             var processor = new PhotoProcessor();
