@@ -10,6 +10,13 @@ namespace CSharpAdvance
             
         }
 
+        private static void DynamicMethod()
+        {
+            var i = 5;
+            dynamic d = i;
+            long l = d;
+        }
+
         private static void NullableValueMethod()
         {
             DateTime? date = null;
