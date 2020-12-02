@@ -6,11 +6,13 @@ namespace CSharpAdvance
     {
         public List<Book> GetBooks()
         {
-            return new List<Book>()
+            return new List<Book>
             {
-                new Book(){Title = "1",Price = 5},
-                new Book(){Title = "2",Price = 7},
-                new Book(){Title = "3",Price = 17}
+                new Book {Title = "ADO.NET Step by Step", Price = 5},
+                new Book {Title = "ASP.NET MVC", Price = 9.99f},
+                new Book {Title = "ASP.NET API", Price = 12},
+                new Book {Title = "C# Advanced Topics", Price = 7},
+                new Book {Title = "C# Advanced Topics", Price = 9}
             };
         }
     }

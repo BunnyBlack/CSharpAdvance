@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 
 namespace CSharpAdvance
 {
@@ -7,6 +8,52 @@ namespace CSharpAdvance
         public static void Main(string[] args)
         {
             
+        }
+
+        private static void LINQMethod()
+        {
+            var books = new BookRepository().GetBooks();
+            var cheapBooks = books
+                .Where(b => b.Price < 10)
+                .OrderBy(b => b.Title);
+
+
+            foreach (var cheapBook in cheapBooks)
+            {
+                Console.WriteLine("{0} : {1}", cheapBook.Title, cheapBook.Price.ToString());
+            }
+
+            Console.WriteLine();
+
+            var bookTitles =
+                from b in books
+                where b.Price < 10
+                orderby b.Price
+                select b.Title;
+            foreach (var bookTitle in bookTitles)
+            {
+                Console.WriteLine(bookTitle);
+            }
+
+            Console.WriteLine();
+            
+            Console.WriteLine(books.SingleOrDefault(b=> b.Title == "1") == null);
+            Console.WriteLine(books.First(b=> b.Title == "C# Advanced Topics").Price.ToString());
+            Console.WriteLine(books.Last(b=> b.Title == "C# Advanced Topics").Price.ToString());
+            var pagedBooks = books.Skip(2).Take(3);
+            foreach (var pagedBook in pagedBooks)
+            {
+                Console.WriteLine(pagedBook.Title);
+            }
+
+            var count = books.Count;
+            Console.WriteLine(count);
+            var maxPrice = books.Max(b => b.Price);
+            Console.WriteLine(maxPrice);
+            var minPrice = books.Min(b => b.Price);
+            Console.WriteLine(minPrice);
+            var sumPrice = books.Sum(b => b.Price);
+            Console.WriteLine(sumPrice);
         }
 
         private static void ExtensionMethods()
