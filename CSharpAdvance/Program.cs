@@ -10,6 +10,17 @@ namespace CSharpAdvance
             
         }
 
+        private static void NullableValueMethod()
+        {
+            DateTime? date = null;
+            Console.WriteLine(date.GetValueOrDefault().ToString());
+            Console.WriteLine(date.HasValue);
+            // Console.WriteLine(date.Value);
+            var date2 = date.GetValueOrDefault();
+            DateTime? date3 = date2;
+            Console.WriteLine(date3.GetValueOrDefault().ToString());
+        }
+
         private static void LINQMethod()
         {
             var books = new BookRepository().GetBooks();
