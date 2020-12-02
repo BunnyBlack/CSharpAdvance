@@ -9,6 +9,18 @@ namespace CSharpAdvance
             
         }
 
+        private static void EventMethod()
+        {
+            var video = new Video {Title = "Video 1"};
+            var videoEncoder = new VideoEncoder();
+            var mailService = new MailService();
+            var messageService = new MessageService();
+
+            videoEncoder.VideoEncoded += mailService.OnVideoEncoded;
+            videoEncoder.VideoEncoded += messageService.VideoEncoded;
+            videoEncoder.Encode(video);
+        }
+
         private static void LambdaMethod2()
         {
             var books = new BookRepository().GetBooks();
