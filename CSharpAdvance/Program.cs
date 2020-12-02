@@ -6,12 +6,17 @@ namespace CSharpAdvance
     {
         public static void Main(string[] args)
         {
+            
+        }
+
+        private static void DelegateMethod()
+        {
             var processor = new PhotoProcessor();
             var filter = new PhotoFilters();
-            PhotoProcessor.PhotoFilterHandler filterHandler = filter.ApplyBrightness;
+            Action<Photo> filterHandler = filter.ApplyBrightness;
             filterHandler += filter.ApplyContrast;
             filterHandler += filter.Resize;
-            processor.Process("photo.jpg",filterHandler);
+            processor.Process("photo.jpg", filterHandler);
         }
 
         private static void MyNullable()
