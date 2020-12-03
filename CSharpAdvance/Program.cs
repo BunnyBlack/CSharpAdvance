@@ -1,4 +1,5 @@
 ﻿using System;
+using System.IO;
 using System.Linq;
 
 namespace CSharpAdvance
@@ -8,6 +9,63 @@ namespace CSharpAdvance
         public static void Main(string[] args)
         {
             
+        }
+
+        private static void CustomExceptionMethod()
+        {
+            try
+            {
+                var youtubeApi = new YoutubeApi();
+                var videos = youtubeApi.GetVideos();
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+            }
+        }
+
+        private static void ExceptionHandleMethod()
+        {
+            try
+            {
+                var calculator = new Calculator();
+                calculator.Divide(5, 0);
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine("Sorry, an unexpected error occured");
+            }
+            finally
+            {
+                Console.WriteLine("Over");
+            }
+
+            StreamReader streamReader = null;
+            try
+            {
+                streamReader = new StreamReader(@"c:\test.zip");
+                var content = streamReader.ReadToEnd();
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine("Sorry, an unexpected error occured");
+            }
+            finally
+            {
+                streamReader?.Dispose();
+            }
+
+            try
+            {
+                using (var streamReader1 = new StreamReader(@"c:\test.zip"))
+                {
+                    var content = streamReader1.ReadToEnd();
+                }
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine("Sorry, an unexpected error occured");
+            }
         }
 
         private static void DynamicMethod()
