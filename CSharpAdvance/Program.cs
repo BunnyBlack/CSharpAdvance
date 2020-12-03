@@ -1,6 +1,8 @@
 ﻿using System;
 using System.IO;
 using System.Linq;
+using System.Net;
+using System.Threading.Tasks;
 
 namespace CSharpAdvance
 {
@@ -9,6 +11,41 @@ namespace CSharpAdvance
         public static void Main(string[] args)
         {
             
+        }
+
+        private static async Task<string> GetHtmlAsync(string url)
+        {
+            var webClient = new WebClient();
+
+            return await webClient.DownloadStringTaskAsync(url);
+        }
+
+        private static string GetHtml(string url)
+        {
+            var webClient = new WebClient();
+
+            return webClient.DownloadString(url);
+        }
+        private static async Task DownloadHtmlAsync(string url)
+        {
+            var webClient = new WebClient();
+            var html = await webClient.DownloadStringTaskAsync(url);
+
+            using (var streamWriter = new StreamWriter(@"..\..\result.html"))
+            {
+                await streamWriter.WriteAsync(html);
+            }
+        }
+
+        public static void DownloadHtml(string url)
+        {
+            var webClient = new WebClient();
+            var html = webClient.DownloadString(url);
+
+            using (var streamWriter = new StreamWriter(@"..\..\result.html"))
+            {
+                streamWriter.Write(html);
+            }
         }
 
         private static void CustomExceptionMethod()
@@ -112,10 +149,10 @@ namespace CSharpAdvance
             }
 
             Console.WriteLine();
-            
-            Console.WriteLine(books.SingleOrDefault(b=> b.Title == "1") == null);
-            Console.WriteLine(books.First(b=> b.Title == "C# Advanced Topics").Price.ToString());
-            Console.WriteLine(books.Last(b=> b.Title == "C# Advanced Topics").Price.ToString());
+
+            Console.WriteLine(books.SingleOrDefault(b => b.Title == "1") == null);
+            Console.WriteLine(books.First(b => b.Title == "C# Advanced Topics").Price.ToString());
+            Console.WriteLine(books.Last(b => b.Title == "C# Advanced Topics").Price.ToString());
             var pagedBooks = books.Skip(2).Take(3);
             foreach (var pagedBook in pagedBooks)
             {
